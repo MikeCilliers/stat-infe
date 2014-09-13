@@ -1,0 +1,74 @@
+---
+title: "Lab 1"
+output: html_document
+---
+
+### Loading the data
+
+```{r}
+source("http://www.openintro.org/stat/data/cdc.R")
+```
+
+### Find the number of cases and variables
+```{r}
+str(cdc)
+```
+
+### Type of variable 'genhlth'
+```{r}
+str(cdc$genhlth)
+```
+
+### Type of variable 'weight'
+```{r}
+str(cdc$weight)
+```
+
+### Type of variable 'smoke100'
+```{r}
+str(cdc$smoke100)
+```
+
+### Summary for the 'gender' variable
+```{r}
+table(cdc$gender)
+```
+
+### Relative Frequency of the 'genhlth' variable
+```{r}
+genhlth.freq = table(cdc$genhlth)
+
+# compute relative freq by dividing by the total number of cases
+genhtlh.relfreq = genhlth.freq / nrow(cdc)
+
+genhtlh.relfreq
+```
+
+### Mosaic Plot of Smoking Habits & Gender
+```{r}
+
+gender_smokers = table(cdc$gender, cdc$smoke100)
+
+mosaicplot(gender_smokers, shade=TRUE, legend=TRUE)
+```
+
+### Subset of people under 23 who have smoked more than 100 cigarettes
+```{r}
+table(cdc$age <23, cdc$smoke100)
+```
+
+### Box Plot of BMI vs genhlth
+```{r}
+bmi = (cdc$weight / cdc$height ^ 2) * 703
+boxplot(bmi ~ cdc$genhlth)
+
+```
+
+### Plot between weight and desired weight
+```{r}
+plot(log(cdc$wtdesire) ~ log(cdc$weight))
+```
+
+
+
+
